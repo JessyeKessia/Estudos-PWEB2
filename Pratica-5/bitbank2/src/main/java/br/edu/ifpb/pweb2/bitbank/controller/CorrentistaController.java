@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.edu.ifpb.pweb2.bitbank.model.Correntista;
 import br.edu.ifpb.pweb2.bitbank.service.CorrentistaService;
 
@@ -21,18 +24,18 @@ public class CorrentistaController {
     private CorrentistaService correntistasService;
 
     @GetMapping("/form")
-    public String getForm(Correntista correntista, Model model) {
-        model.addAttribute("correntista", correntista);
-        return "correntistas/form";
+    public ModelAndView getForm(Correntista correntista, ModelAndView model) {
+        model.setViewName("correntistas/form");
+        model.addObject("correntista", correntista);
+        return model;
     }
     
     @PostMapping
-    public String save(Correntista correntista, Model model) {
+    public String save(Correntista correntista, Model model, RedirectAttributes atributo) {
         correntistasService.save(correntista);
-
-        model.addAttribute("mensagem", "Correntista cadastrado com sucesso!");
-        model.addAttribute("correntistas", correntistasService.findAll());
-        return "correntistas/list";
+        
+        atributo.addFlashAttribute("mensagem", "Correntista cadastrado com sucesso!");
+        return "redirect:/correntistas";
     }
 
     @GetMapping
