@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.bitbank.model.Correntista;
 import br.edu.ifpb.pweb2.bitbank.service.CorrentistaService;
 
-// classe controladora para gerenciar as requisições relacionadas aos correntistas
+
+
 @Controller
-// anotação para mapear as requisições para o caminho "/correntistas"
 @RequestMapping("/correntistas")
 public class CorrentistaController {
     
@@ -22,7 +23,6 @@ public class CorrentistaController {
     @Autowired
     private CorrentistaService correntistasService;
 
-    // o método faz o data binding do objeto correntista para a view
     @GetMapping("/form")
     public ModelAndView getForm(Correntista correntista, ModelAndView model) {
         model.setViewName("correntistas/form");
@@ -31,12 +31,12 @@ public class CorrentistaController {
     }
     
     @PostMapping
-    public String save(Correntista correntista, Model model) {
+    public String save(Correntista correntista, Model model, RedirectAttributes atributo) {
         correntistasService.save(correntista);
-
-        model.addAttribute("mensagem", "Correntista cadastrado com sucesso!");
-        model.addAttribute("correntistas", correntistasService.findAll());
-        return "correntistas/list";
+        
+        atributo.addFlashAttribute("mensagem", "Correntista cadastrado com sucesso!");
+        
+        return "redirect:/correntistas";
     }
 
     @GetMapping

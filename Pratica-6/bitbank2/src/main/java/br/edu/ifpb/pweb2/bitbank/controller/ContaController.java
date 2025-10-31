@@ -36,27 +36,27 @@ public class ContaController {
         return correntistaService.findAll();
     }
 
-    // mapeia as requisições para /form
-    @GetMapping("/form")
-    public ModelAndView getForm(Conta conta, ModelAndView modelAndView) {
-
-        modelAndView.setViewName("contas/form");
-        modelAndView.addObject("conta", conta);
-        return modelAndView;
-    }
-    // new Conta(new Correntista())
 
     @PostMapping
-    public ModelAndView adicioneConta(@ModelAttribute Conta conta, ModelAndView modelAndView) {
+    public ModelAndView adicioneConta(Conta conta, ModelAndView modelAndView) {
         if (conta.getCorrentista() != null && conta.getCorrentista().getId() != null) {
             Correntista correntista = correntistaService.findById(conta.getCorrentista().getId());
             conta.setCorrentista(correntista);
-        }
+    }
 
     contaService.save(conta);
     modelAndView.setViewName("contas/list");
     modelAndView.addObject("contas", contaService.findAll());
     return modelAndView;
+    }
+
+// mapeia as requisições para /form
+    @GetMapping("/form")
+    public ModelAndView getForm(ModelAndView modelAndView) {
+
+        modelAndView.setViewName("contas/form");
+        modelAndView.addObject("conta", new Conta(new Correntista()));
+        return modelAndView;
     }
 
     @GetMapping

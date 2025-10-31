@@ -14,7 +14,7 @@ public class Conta implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private Correntista correntista =  new Correntista();
+    private Correntista correntista;
     private String numero;
     private Set<Transacao> transacoes = new HashSet<Transacao>();
     private LocalDate data;
