@@ -1,0 +1,11 @@
+package br.edu.ifpb.pweb2.springioc.paragrafo;
+
+import br.edu.ifpb.pweb2.springioc.paragrafo.GeradorParagrafoIntf;
+import org.springframework.stereotype.Component;
+
+@Component
+public class GeradorParagrafoLibreOffice implements GeradorParagrafoIntf{
+    public void addParagrafo(String texto) {
+        System.out.println("{LibreOffice}" + texto + "{/LibreOffice}");
+    }
+}
