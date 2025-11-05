@@ -12,7 +12,9 @@ class CatalogoController {
 
     @GetMapping()
     public ModelAndView getMethodName(ModelAndView model) {
+
         model.addObject("catalogo", Catalogo.getItens());
+
         model.setViewName("catalogo");
         return model;
 

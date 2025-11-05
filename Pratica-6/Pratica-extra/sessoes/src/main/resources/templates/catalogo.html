@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="pt_BR" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +7,26 @@
     <title>Catálogo de Livros</title>
 </head>
 <body>
-    <style>
+<style>
     body { font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
-    </style>
-    <h1>Livros de Java</h1>
+</style>
+<h1>Livros de Java</h1>
 
-    <div th:if="${mensagem ne null}" th:text="${mensagem}" style="color: red;"></div>
+<div th:if="${mensagem ne null}" th:text="${mensagem}" style="color: red;"></div>
 
 
-    <div style="text-align:center">[<a th:href="@{/carrinho}">Ver carrinho</a>]</div>
-    <div th:each="item : ${catalogo}">
-        <hr />
-        
-        <form th:action="@{/carrinho}" method="POST">
-            <input type="hidden" th:value="${item.id}" name="id" />
-            <h2> <span th:utext="${item.descricaoCurta}"></span> (R$ <span th:text="${item.preco}"></span>) </h2>
-            <span th:text="${item.descricaoLonga}"></span>
-            <div style="text-align: center;">
-                <input type="submit" value="adicionar ao carrinho" />
-            </div>
-        </form>
-    </div>
+<div style="text-align:center">[<a th:href="@{/carrinho}">Ver carrinho</a>]</div>
+<div th:each="item : ${catalogo}">
+    <hr />
+
+    <form th:action="@{/carrinho}" method="POST">
+        <input type="hidden" th:value="${item.id}" name="id" />
+        <h2> <span th:utext="${item.descricaoCurta}"></span> (R$ <span th:text="${item.preco}"></span>) </h2>
+        <span th:text="${item.descricaoLonga}"></span>
+        <div style="text-align: center;">
+            <input type="submit" value="adicionar ao carrinho" />
+        </div>
+    </form>
+</div>
 </body>
 </html>

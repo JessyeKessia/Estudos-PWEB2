@@ -1,48 +1,60 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Carrinho</title>
-    </head>
-    <body>
-        <style>
-        body { font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
-        </style>
-        <h1 align="center">Estado do seu carrinho</h1>
-        <h2 align="center" th:if="${session.carrinho == null}">Carrinho vazio!</h2>
-        <table border=1 align="center" th:if="${not #lists.isEmpty(session.carrinho.itens)}">
-            <tr bgcolor="#cccccc">
-                <th>Id</th>
-                <th>Descrição</th>
-                <th>Custo unitário</th>
-                <th>Quantidade</th>
-                <th>Custo total</th>
-            </tr>
-            <tr th:each="item : ${session.carrinho.itens}">
-                <td><span th:text="${item.id}"></span></td>
-                <td><i><span th:utext="${item.descricaoCurta}"></span></i></td>
-                <td align="right"> <span th:text="${#numbers.formatDecimal(item.precoUnitario, 1,2)}"></span> </td>
-                <td> 
-                    <form th:action="@{carrinho}" method="post">
-                        <input type="hidden" name="id" th:value="${item.id}">
-                        <input type="text" name="numItens" size=3
-                        th:value="${item.numItens}" style="direction: rtl">
-                        <small><input type="submit" value="atualizar pedido"></small>
-                    </form>
-                </td>
-                <td align="right"><span th:text="${item.precoTotal}"></span></td>
-            </tr>
-        </table>
-        <br />
-        <form th:action="@{/catalogo}" method="get">
-            <div align="center">
-                <input type="submit" value="continuar comprando">
-            </div>
-        </form>
-        <br />
-        <form th:action="@{/carrinho/fim}" method="get">
-            <div align="center">
-                <input type="submit" value="encerrar">
-            </div>
-        </form>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Carrinho</title>
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        h1, h2, div { text-align: center; }
+        table { margin: 0 auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+<h1>Estado do seu carrinho</h1>
+
+<h2 th:if="${session.carrinho == null}">Carrinho vazio!</h2>
+
+<table th:if="${session.carrinho != null and not #lists.isEmpty(session.carrinho.itens)}">
+
+    <tr>
+        <th>Id</th>
+        <th>Descrição</th>
+        <th>Custo unitário</th>
+        <th>Quantidade</th>
+        <th>Custo total</th>
+    </tr>
+    <tr th:each="item : ${session.carrinho.itens}">
+        <td th:text="${item.id}"></td>
+        <td><i th:text="${item.descricaoCurta}"></i></td>
+        <td th:text="${#numbers.formatDecimal(item.precoUnitario, 1, 2)}" style="text-align: right;"></td>
+        <td>
+            <form th:action="@{/carrinho}" method="post">
+                <input type="hidden" name="id" th:value="${item.id}">
+                <input type="text" name="numItens" size="3" th:value="${item.numItens}" style="direction: rtl;">
+                <small><input type="submit" value="Atualizar pedido"></small>
+            </form>
+        </td>
+        <td th:text="${item.precoTotal}" style="text-align: right;"></td>
+    </tr>
+</table>
+
+<br />
+
+<form th:action="@{/catalogo}" method="get">
+    <div>
+        <input type="submit" value="Continuar comprando">
+    </div>
+</form>
+
+<br />
+
+<form th:action="@{/carrinho/fim}" method="get">
+    <div>
+        <input type="submit" value="Encerrar">
+    </div>
+</form>
+</body>
 </html>

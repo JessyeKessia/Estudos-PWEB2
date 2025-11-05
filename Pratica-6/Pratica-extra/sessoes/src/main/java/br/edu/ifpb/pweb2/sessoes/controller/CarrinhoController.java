@@ -20,7 +20,9 @@ public class CarrinhoController {
 
     @PostMapping
     public ModelAndView addCarrinho(String id, Integer numItens, HttpSession session, ModelAndView model) {
+
         Carrinho carrinho = ((Carrinho) session.getAttribute("carrinho"));
+
         if (carrinho == null) {
             carrinho = new Carrinho();
         }
