@@ -67,9 +67,12 @@ public class ContaController {
     }
     
     @GetMapping("/{id}")
-    public String getContaById(@PathVariable(value = "id") Integer id, Model model) {
-        model.addAttribute("conta", contaService.findById(id));
-        return "contas/form";
+    public ModelAndView getContaById(@PathVariable("id") Integer id) {
+        
+        ModelAndView model = new ModelAndView();
+        model.setViewName("contas/form");
+        model.addObject("conta", contaService.findById(id));
+        return model;
     }
 
 }

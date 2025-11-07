@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/auth.css}" />
+    <link rel="icon" th:href="@{/imagens/favicon.ico}" type="image/x-icon" />
+    
+    <title>BitBank - Login</title>
+</head>
+
+
+<body>
+    <h1> Login </h1>
+
+    <form th:action="@{/auth}" class="form-signin" method="POST" th:object="${correntista}"></form>
+
+        <label for="email">E-mail</label>
+        <input type="text" th:field="*{email}" /><br /><br />
+
+        <label for="senha">Senha</label>
+        <input type="password" th:field="*{senha}" /><br /><br />
+
+        <hr>
+
+        <button type="submit">Entrar</button>
+</body>
+
+
+</html>
