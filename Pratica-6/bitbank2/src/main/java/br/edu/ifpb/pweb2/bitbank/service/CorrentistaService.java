@@ -8,7 +8,6 @@ import br.edu.ifpb.pweb2.util.PasswordUtil;
 
 import br.edu.ifpb.pweb2.bitbank.model.Correntista;
 import br.edu.ifpb.pweb2.bitbank.repository.CorrentistaRepository;
-import br.edu.ifpb.pweb2.util.PasswordUtil;
 
 @Component
 public class CorrentistaService implements Service<Correntista, Integer> {
@@ -32,7 +31,6 @@ public class CorrentistaService implements Service<Correntista, Integer> {
         return correntistaRepository.save(correntista);
     }
 
-    @Override
     public Correntista findByEmail(String email) {
         return correntistaRepository.findByEmail(email);
     }

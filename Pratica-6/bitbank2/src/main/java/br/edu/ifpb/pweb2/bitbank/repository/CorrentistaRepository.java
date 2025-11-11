@@ -48,7 +48,7 @@ public class CorrentistaRepository {
     public Correntista findByEmail(String email) {
         return repositorio.values().stream()
                 .filter(c -> c.getEmail().equals(email))
-                .findFist()
+                .findFirst()
                 .orElse(null);
     }
 

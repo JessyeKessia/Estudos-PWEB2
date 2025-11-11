@@ -1,30 +1,33 @@
-<!DOCTYPE html>
-<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org">
-    
-<head>
+<html lang="pt_BR">
+  <head>
+    <title>BitBank</title>
+    <meta charset="utf-8" />
+
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/auth.css}" />
     <link rel="icon" th:href="@{/imagens/favicon.ico}" type="image/x-icon" />
-    
-    <title>BitBank - Login</title>
-</head>
+  </head>
 
+  <body>
+    <form th:action="@{/auth}" method="POST" th:object="${usuario}" class="form-signin">
+      <div class="centered">
+        <img th:src="@{/imagens/bitbank-logo.png}" alt="Logo do Bitbank" />
+        <p>Por favor, autentique-se</p>
 
-<body>
-    <h1> Login </h1>
+        <div th:if="${not #strings.isEmpty(mensagem)}" th:utext="${mensagem}" role="alert"></div>
 
-    <form th:action="@{/auth}" class="form-signin" method="POST" th:object="${correntista}"></form>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" placeholder="Email" required autofocus th:field="*{email}" />
+        </div>
 
-        <label for="email">E-mail</label>
-        <input type="text" th:field="*{email}" /><br /><br />
-
-        <label for="senha">Senha</label>
-        <input type="password" th:field="*{senha}" /><br /><br />
-
-        <hr>
+        <div>
+          <label for="senha">Senha</label>
+          <input type="password" placeholder="Senha" required th:field="*{senha}" />
+        </div>
 
         <button type="submit">Entrar</button>
-</body>
-
-
+      </div>
+    </form>
+  </body>
 </html>

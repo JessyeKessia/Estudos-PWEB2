@@ -1,17 +1,17 @@
 package br.edu.ifpb.pweb2.bitbank.controller;
 
-import com.seuprojeto.model.Correntista;
-
+import br.edu.ifpb.pweb2.bitbank.model.Correntista;
 import br.edu.ifpb.pweb2.bitbank.service.CorrentistaService;
-import main.java.br.edu.ifpb.pweb2.util.PasswordUtil;
+import br.edu.ifpb.pweb2.util.PasswordUtil;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/auth")
@@ -21,14 +21,14 @@ public class AuthController {
     private CorrentistaService correntistaService;
 
 
-    @GetMapping("/login")
+    @GetMapping
     public ModelAndView getLoginForm(ModelAndView modelAndView) {
         modelAndView.setViewName("auth/login");
         modelAndView.addObject("usuario", new Correntista());
         return modelAndView;
     }
 
-    @PostMapping("/login")
+    @PostMapping
     public ModelAndView validarLogin(Correntista correntista, HttpSession session, ModelAndView model, RedirectAttributes redirectAttributes) {
     
         if ((correntista = this.isValido(correntista)) != null) {
@@ -60,7 +60,7 @@ public class AuthController {
     @GetMapping("/logout")
     public ModelAndView logout(HttpSession session, ModelAndView model) {
         session.invalidate();
-        model.setViewName("redirect:/auth/login");
+        model.setViewName("redirect:/auth");
         return model;
     }
 

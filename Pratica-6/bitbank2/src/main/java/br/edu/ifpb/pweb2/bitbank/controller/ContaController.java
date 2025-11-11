@@ -5,7 +5,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.edu.ifpb.pweb2.bitbank.model.Correntista;
 import br.edu.ifpb.pweb2.bitbank.service.ContaService;
 import br.edu.ifpb.pweb2.bitbank.service.CorrentistaService;
-import org.springframework.ui.Model;
 import br.edu.ifpb.pweb2.bitbank.model.Conta;
 
 import java.util.List;
