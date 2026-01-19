@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layouts/principal}" th:with="titulo='Home'">
+<body>
+  <div>
+
+    <!-- Conteúdo principal -->
+    
+    <div layout:fragment="conteudo">
+          <p>Este é o Bitbank, o seu banco digital muito mais acessível.</p>
+
+          <div>Como administrador, você poderá:</div>
+          <ul>
+            <li>
+              Adicionar ou consultar correntistas cadastrados usando o menu
+              <strong>Correntistas</strong>
+            </li>
+            <li>
+              Adicionar ou consultar contas cadastradas usando o menu
+              <strong>Contas</strong>
+            </li>
+          </ul>
+          <div>Como cliente, você poderá realizar operações na sua conta:</div>
+          <ul>
+            <li>Realizar créditos</li>
+            <li>Realizar pagamentos</li>
+            <li>Realizar transferências</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
