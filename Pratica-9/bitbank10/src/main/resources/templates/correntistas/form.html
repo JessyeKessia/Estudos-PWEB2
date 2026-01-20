@@ -1,0 +1,42 @@
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta th:insert="~{/fragments/head(titulo='Cadastro de correntistas')}">
+</head>
+<body>
+    <div th:replace="~{/fragments/cabecalho}"></div>
+    <div class="container">
+        <div th:if="${mensagem ne null}" th:text="${mensagem}" class="alert alert-success"></div>
+        <div class="card">
+            <div class="card-header">
+                Cadastro de Correntista
+            </div>
+            <div class="card-body">
+                <form th:action="@{/correntistas}" method="POST" th:object="${correntista}">
+                    
+                    <input type="hidden" th:field="*{id}" />
+
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" th:field="*{nome}" />
+                    <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:errorClass="error"></p>
+
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" class="form-control" th:field="*{senha}" />
+                    <p th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" th:errorClass="error"></p>
+
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" class="form-control" th:field="*{email}" />
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorClass="error"></p>
+                    
+                    <br>
+                    <div class="form-check">
+                        <label class="form-check-label"for="admin">Administrador</label>
+                        <input type="checkbox" class="form-check-input" th:field="*{admin}" />
+                    </div><br/>
+                        <input type="submit" class="btn btn-primary" value="Salvar" />
+                        <a class="btn btn-secondary" th:href="@{/correntistas}">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

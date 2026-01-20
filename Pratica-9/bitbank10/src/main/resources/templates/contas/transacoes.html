@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt_BR" xmlns:th="www.thymeleaf.org">
+    <head>
+      <meta th:insert="~{/fragments/head(titulo='Cadastro de transações')}">
+    </head>
+<body>
+     <!-- Cabecalho comum -->
+    <div th:replace="~{/fragments/cabecalho}"></div>
+    <div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+            Transações da Conta
+        </div>
+
+        <div class="card-body">
+
+            <!-- Dados da conta -->
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>Conta</th>
+                    <th>Correntista</th>
+                    <th>Data de abertura</th>
+                </tr>
+                <tr>
+                    <td th:text="${conta.numero}"></td>
+                    <td th:text="${conta.correntista.nome}"></td>
+                    <td th:text="${#temporals.format(conta.data, 'dd/MM/yyyy')}"></td>
+                </tr>
+            </table>
+
+            <!-- Lista de transações -->
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th class="text-end">Valor</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="transacao : ${conta.transacoes}">
+                        <td th:text="${transacao.descricao}"></td>
+                        <td th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#numbers.formatCurrency(transacao.valor)}"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<br>
+
+</body>
+</html>
