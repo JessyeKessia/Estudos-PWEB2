@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta th:insert="~{/fragments/head(${titulo})}">
+    </head>
+    <body>
+        <div th:replace="~{fragments/cabecalho}"></div>
+        <div class="container">
+            <div th:text="${mensagem}" th:if="${mensagem ne null}" class="alert alert-success"></div>
+            <div class="card">
+                <div class="card-header">
+                    <span th:text="${titulo}">Titulo do card</span>
+                </div>
+                <div class="card-body">
+                    <div layout:fragment="conteudo">
+                        <h1>Conteudo não definido</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
